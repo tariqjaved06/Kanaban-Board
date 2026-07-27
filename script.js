@@ -29,6 +29,44 @@ let tasks = [
     status: "pending",
   },
 ];
+//
+let pageStatus = null;
+if (
+  document.getElementById("pending-list") &&
+  !document.getElementById("doing-list")
+) {
+  pageStatus = "pending";
+} else if (
+  document.getElementById("doing-list") &&
+  !document.getElementById("pending-list")
+) {
+  pageStatus = "doing";
+} else if (
+  document.getElementById("done-list") &&
+  !document.getElementById("pending-list")
+) {
+  pageStatus = "done";
+}
+
+//Filter button Functionlity
+const filterBtn = document.getElementById('filter-btn');
+const filterDropDown = document.getElementById('filter-dropdown');
+
+if (filterBtn && filterDropDown) {
+  filterBtn.addEventListener('click', function () {
+    filterDropDown.classList.toggle('hidden');
+  });
+
+  document.addEventListener('click', function (event) {
+    const isDropdownOpen = !filterDropDown.classList.contains('hidden');
+    const clickedInsideDropdown = filterDropDown.contains(event.target);
+    const clickedFilterBtn = filterBtn.contains(event.target);
+
+    if (isDropdownOpen && !clickedInsideDropdown && !clickedFilterBtn) {
+      filterDropDown.classList.add('hidden');
+    }
+  });
+}
 //Load the saved task
 function loadTasks() {
   const saved = localStorage.getItem("tasks");
@@ -169,6 +207,9 @@ document.addEventListener("click", function (event) {
   updateCount();
   saveTasks();
 });
+const status = pageStatus
+  ? pageStatus
+  : document.querySelector('input[name="status"]:checked').value;
 
 //Create Task - guarded, since not every page has this button
 function createTask() {
@@ -180,9 +221,9 @@ function createTask() {
       const title = document.getElementById("task-title").value;
       const description = document.getElementById("task-desc").value;
       const dueDate = document.getElementById("due-date").value;
-      const status = document.querySelector(
-        'input[name="status"]:checked',
-      ).value;
+      const status = pageStatus
+        ? pageStatus
+        : document.querySelector('input[name="status"]:checked').value;
       const priority = document.querySelector(
         'input[name="priority"]:checked',
       ).value;

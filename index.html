@@ -303,23 +303,137 @@
               </p>
             </div>
             <div class="flex items-center gap-2">
-              <button
-                type="button"
-                class="flex items-center gap-1.5 px-3 py-2 rounded-lg border border-gray-200 text-sm text-slate hover:bg-surface"
-              >
-                <svg
-                  class="size-4"
-                  width="16"
-                  height="16"
-                  viewBox="0 0 24 24"
-                  fill="none"
-                  stroke="currentColor"
-                  stroke-width="2"
+              <!-- FILTER (wrapped for dropdown positioning) -->
+              <div class="relative">
+                <button
+                  type="button"
+                  id="filter-btn"
+                  class="flex items-center gap-1.5 px-3 py-2 rounded-lg border border-gray-200 text-sm text-slate hover:bg-surface"
                 >
-                  <path d="M4 6h16M7 12h10M10 18h4" />
-                </svg>
-                Filter
-              </button>
+                  <svg
+                    class="size-4"
+                    width="16"
+                    height="16"
+                    viewBox="0 0 24 24"
+                    fill="none"
+                    stroke="currentColor"
+                    stroke-width="2"
+                  >
+                    <path d="M4 6h16M7 12h10M10 18h4" />
+                  </svg>
+                  Filter
+                </button>
+                <div
+                  id="filter-dropdown"
+                  class="hidden absolute top-full mt-2 left-0 w-64 bg-white border border-gray-200 rounded-xl shadow-lg p-3 z-20"
+                >
+                  <div class="mb-3">
+                    <p
+                      class="text-xs font-semibold text-slate uppercase tracking-wide mb-2"
+                    >
+                      Priority
+                    </p>
+                    <label
+                      class="flex items-center gap-2 text-sm py-1 cursor-pointer"
+                    >
+                      <input
+                        type="checkbox"
+                        class="filter-checkbox accent-violet"
+                        data-filter-type="priority"
+                        data-value="low"
+                      />
+                      Low
+                    </label>
+                    <label
+                      class="flex items-center gap-2 text-sm py-1 cursor-pointer"
+                    >
+                      <input
+                        type="checkbox"
+                        class="filter-checkbox accent-violet"
+                        data-filter-type="priority"
+                        data-value="medium"
+                      />
+                      Medium
+                    </label>
+                    <label
+                      class="flex items-center gap-2 text-sm py-1 cursor-pointer"
+                    >
+                      <input
+                        type="checkbox"
+                        class="filter-checkbox accent-violet"
+                        data-filter-type="priority"
+                        data-value="high"
+                      />
+                      High
+                    </label>
+                  </div>
+
+                  <div class="pt-3 border-t border-gray-100">
+                    <p
+                      class="text-xs font-semibold text-slate uppercase tracking-wide mb-2"
+                    >
+                      Tag
+                    </p>
+                    <label
+                      class="flex items-center gap-2 text-sm py-1 cursor-pointer"
+                    >
+                      <input
+                        type="checkbox"
+                        class="filter-checkbox accent-violet"
+                        data-filter-type="tag"
+                        data-value="thesis"
+                      />
+                      #thesis
+                    </label>
+                    <label
+                      class="flex items-center gap-2 text-sm py-1 cursor-pointer"
+                    >
+                      <input
+                        type="checkbox"
+                        class="filter-checkbox accent-violet"
+                        data-filter-type="tag"
+                        data-value="webdev"
+                      />
+                      #webdev
+                    </label>
+                    <label
+                      class="flex items-center gap-2 text-sm py-1 cursor-pointer"
+                    >
+                      <input
+                        type="checkbox"
+                        class="filter-checkbox accent-violet"
+                        data-filter-type="tag"
+                        data-value="semproject"
+                      />
+                      #semproject
+                    </label>
+                    <label
+                      class="flex items-center gap-2 text-sm py-1 cursor-pointer"
+                    >
+                      <input
+                        type="checkbox"
+                        class="filter-checkbox accent-violet"
+                        data-filter-type="tag"
+                        data-value="personal"
+                      />
+                      #personal
+                    </label>
+                    <label
+                      class="flex items-center gap-2 text-sm py-1 cursor-pointer"
+                    >
+                      <input
+                        type="checkbox"
+                        class="filter-checkbox accent-violet"
+                        data-filter-type="tag"
+                        data-value="work"
+                      />
+                      #work
+                    </label>
+                  </div>
+                  <!-- checkboxes go here, next step -->
+                </div>
+              </div>
+
               <button
                 type="button"
                 class="flex items-center gap-1.5 px-3 py-2 rounded-lg border border-gray-200 text-sm text-slate hover:bg-surface"
@@ -549,8 +663,6 @@
                   </svg>
                 </button>
               </div>
-
- 
             </div>
 
             <!-- DONE -->
@@ -585,8 +697,6 @@
                   </svg>
                 </button>
               </div>
-
-              
             </div>
           </section>
         </div>
