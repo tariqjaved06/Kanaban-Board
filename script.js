@@ -29,7 +29,8 @@ let tasks = [
     status: "pending",
   },
 ];
-//
+
+//What status does this page enforce (if any)?
 let pageStatus = null;
 if (
   document.getElementById("pending-list") &&
@@ -48,25 +49,26 @@ if (
   pageStatus = "done";
 }
 
-//Filter button Functionlity
-const filterBtn = document.getElementById('filter-btn');
-const filterDropDown = document.getElementById('filter-dropdown');
+//Filter button Functionality
+const filterBtn = document.getElementById("filter-btn");
+const filterDropDown = document.getElementById("filter-dropdown");
 
 if (filterBtn && filterDropDown) {
-  filterBtn.addEventListener('click', function () {
-    filterDropDown.classList.toggle('hidden');
+  filterBtn.addEventListener("click", function () {
+    filterDropDown.classList.toggle("hidden");
   });
 
-  document.addEventListener('click', function (event) {
-    const isDropdownOpen = !filterDropDown.classList.contains('hidden');
+  document.addEventListener("click", function (event) {
+    const isDropdownOpen = !filterDropDown.classList.contains("hidden");
     const clickedInsideDropdown = filterDropDown.contains(event.target);
     const clickedFilterBtn = filterBtn.contains(event.target);
 
     if (isDropdownOpen && !clickedInsideDropdown && !clickedFilterBtn) {
-      filterDropDown.classList.add('hidden');
+      filterDropDown.classList.add("hidden");
     }
   });
 }
+
 //Load the saved task
 function loadTasks() {
   const saved = localStorage.getItem("tasks");
@@ -81,6 +83,7 @@ loadTasks();
 function saveTasks() {
   localStorage.setItem("tasks", JSON.stringify(tasks));
 }
+
 //Priority Class Creation
 const getPriorityClass = function (priority) {
   const map = {
@@ -207,9 +210,6 @@ document.addEventListener("click", function (event) {
   updateCount();
   saveTasks();
 });
-const status = pageStatus
-  ? pageStatus
-  : document.querySelector('input[name="status"]:checked').value;
 
 //Create Task - guarded, since not every page has this button
 function createTask() {
@@ -258,6 +258,9 @@ function createTask() {
     });
   }
 }
+
+//Actually wire up the create task button - this call was missing before
+createTask();
 
 //Update task by Button in boards
 document.addEventListener("click", function (event) {
